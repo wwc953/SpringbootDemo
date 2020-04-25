@@ -6,6 +6,7 @@ echo "start tomcat....."
 
 sh $tomcat_version/bin/startup.sh
 
+
 if [ $? -eq 0 ]; then
 	PID=$(ps -ef | grep java | grep -v grep | awk '{print $2}')
     echo $PID > $1/tomcat.pid
