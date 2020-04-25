@@ -1,5 +1,4 @@
 #!/bin/bash
-
 #tomcat版本
 tomcat_version=apache-tomcat-8.5.23
 #绝对路径
