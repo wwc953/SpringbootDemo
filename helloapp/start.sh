@@ -9,8 +9,9 @@ user=$(whoami)
 echo "$user start tomcat....."
 
 sh $absolute_tomcat_path/bin/startup.sh
+#有问题，当时war使，tomcat会启动两次？？？
+#第一次是一个进程，第二次是springboot项目的进程id？？？
 #nohup $absolute_tomcat_path/bin/startup.sh >/dev/null 2>&1 &
-#nohup $absolute_tomcat_path/bin/startup.sh > $absolute_tomcat_path/loggggg.log &
 
 if [ $? -eq 0 ]; then
 	PID=$(ps -ef | grep -w $absolute_tomcat_path | grep -v grep | awk '{print $2}')
