@@ -12,7 +12,7 @@ if [ -z ${PID} ]; then
 else
     kill -9 $PID
     echo "${user} kill -9 ${PID}"
-    > ${absolute_tomcat_path}/tomcat.pid
+    #> ${absolute_tomcat_path}/tomcat.pid
 fi
 
 
