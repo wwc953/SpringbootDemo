@@ -38,6 +38,7 @@ fi
 #cp -r $projectName/target/*.war releas
 cp -r target/*.war $tomcat_version/webapps
 
+
 #######添加war
 #cp -r releas/*.war $webapp_dir
 
