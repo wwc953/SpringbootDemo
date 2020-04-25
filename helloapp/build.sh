@@ -45,4 +45,7 @@ cp -r target/*.war $tomcat_version/webapps
 #mkdir -p $warbak_dir
 #cp $webapp_dir/$projectName.war $warbak_dir/$projectName.war_$(date "+%Y%m%d%H%M%S")
 #rm -f $webapp_dir/$projectName.war
+
+dos2unix *.sh
+
 sh ./start.sh

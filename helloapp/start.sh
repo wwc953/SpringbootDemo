@@ -13,9 +13,9 @@ echo "$user start tomcat....."
 nohup $absolute_tomcat_path/bin/startup.sh >/dev/null 2>&1 &
 
 if [ $? -eq 0 ]; then
-	PID=$(ps -ef | grep java | grep -w $absolute_tomcat_path | grep -v grep | awk '{print $2}')
+	PID=$(ps -ef | grep -w $absolute_tomcat_path | grep -v grep | awk '{print $2}')
 	if [ -z ${PID} ]; then
-		echo "start error!!!"
+		echo "no PID,start error!!!"
 	else
 	    echo $PID > $1/tomcat.pid
 	fi
