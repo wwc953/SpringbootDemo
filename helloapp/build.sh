@@ -47,6 +47,6 @@ cp -r target/*.war $tomcat_version/webapps
 #rm -f $webapp_dir/$projectName.war
 
 dos2unix *.sh
-#chmod 777 *.sh
+chmod 777 *.sh
 
 sh ./start.sh

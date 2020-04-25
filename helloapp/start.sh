@@ -16,6 +16,7 @@ if [ $? -eq 0 ]; then
 	if [ -z ${PID} ]; then
 		echo "no PID,start error!!!"
 	else
+	    echo "$PID > $absolute_tomcat_path/tomcat.pid"
 	    echo $PID > $absolute_tomcat_path/tomcat.pid
 	fi
 else
