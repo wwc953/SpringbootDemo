@@ -13,7 +13,7 @@ absolute_tomcat_path=$absolute_path/$tomcat_version
 echo "build.sh begin............"
 
 # grep -w 精确匹配
-PID=$(ps -ef | grep java | grep -w $absolute_tomcat_path | grep -v grep | awk '{print $2}')
+PID=$(ps -ef | grep -w $absolute_tomcat_path | grep -v grep | awk '{print $2}')
 if [ $PID ]; then
     echo "停止进程：kill -9 $PID"
 	kill -9 $PID
@@ -47,5 +47,6 @@ cp -r target/*.war $tomcat_version/webapps
 #rm -f $webapp_dir/$projectName.war
 
 dos2unix *.sh
+#chmod 777 *.sh
 
 sh ./start.sh
