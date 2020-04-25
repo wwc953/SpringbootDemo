@@ -1,7 +1,4 @@
-# SpringbootDemo
-helloapp --> war
-
-### Maven
+### Maven 打war包
 	Maven检查所有SNAPSHOT依赖更新，确保集成基于最新的状态
 	mnv -U
 	
