@@ -8,9 +8,9 @@ user=$(whoami)
 
 echo "$user start tomcat....."
 
-#sh $absolute_tomcat_path/bin/startup.sh
+sh $absolute_tomcat_path/bin/startup.sh
 #nohup $absolute_tomcat_path/bin/startup.sh >/dev/null 2>&1 &
-nohup $absolute_tomcat_path/bin/startup.sh > $absolute_tomcat_path/loggggg.log &
+#nohup $absolute_tomcat_path/bin/startup.sh > $absolute_tomcat_path/loggggg.log &
 
 if [ $? -eq 0 ]; then
 	PID=$(ps -ef | grep -w $absolute_tomcat_path | grep -v grep | awk '{print $2}')
