@@ -6,14 +6,29 @@ warbak_dir=/home/work/warbak
 #webapp_dir=/home/work/8tomcat/webapps
 #tomcat版本
 tomcat_version=apache-tomcat-8.5.23
+#绝对路径
+absolute_path=`pwd`
+absolute_tomcat_path=$absolute_path/$tomcat_version
 
-rm -rf releas
-mkdir releas
+echo "build.sh begin............"
+
+# grep -w 精确匹配
+PID=$(ps -ef | grep java | grep -w $absolute_tomcat_path | grep -v grep | awk '{print $2}')
+if [ $PID ]; then
+    echo "停止进程：kill -9 $PID"
+	kill -9 $PID
+else
+    echo "无历史进程...."
+fi
+
+#rm -rf releas
+#mkdir releas
 #打包
 #mvn -f $projectName/pom.xml -U -Dmaven.test.skip=true clean package
 mvn -U -Dmaven.test.skip=true clean package -P prod
 
-tar -zxvf ./soft/$tomcat_version.tar.gz -C ./
+#tar -zxvf ./soft/$tomcat_version.tar.gz -C ./
+tar -zxf ./soft/$tomcat_version.tar.gz -C ./
 if [ $? -ne 0 ]; then
 	echo "$tomcat_version.tar.gz 解压出错!!!"
 	exit;
@@ -28,4 +43,4 @@ cp -r target/*.war $tomcat_version/webapps
 #mkdir -p $warbak_dir
 #cp $webapp_dir/$projectName.war $warbak_dir/$projectName.war_$(date "+%Y%m%d%H%M%S")
 #rm -f $webapp_dir/$projectName.war
-sh ./start.sh $tomcat_version
+sh ./start.sh
