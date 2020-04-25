@@ -22,6 +22,8 @@ else
 fi
 
 #rm -rf releas
+rm -rf $tomcat_version
+
 #mkdir releas
 #打包
 #mvn -f $projectName/pom.xml -U -Dmaven.test.skip=true clean package
