@@ -22,3 +22,11 @@
     
     git强制覆盖本地命令（单条执行）：
     git fetch --all && git reset --hard origin/master && git pull
+    
+    
+### IDEA mybatis.generator
+    配置
+    Edit Configuration
+    + Maven
+    Command line：mybatis-generator:generate -e
+    Run 

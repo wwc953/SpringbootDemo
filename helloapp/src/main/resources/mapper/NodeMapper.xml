@@ -1,0 +1,220 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.example.demo.dao.NodeMapper" >
+  <resultMap id="BaseResultMap" type="com.example.demo.model.Node" >
+    <id column="node_id" property="nodeId" jdbcType="CHAR" />
+    <result column="flow_id" property="flowId" jdbcType="CHAR" />
+    <result column="staff" property="staff" jdbcType="CHAR" />
+    <result column="levels" property="levels" jdbcType="CHAR" />
+    <result column="hasten" property="hasten" jdbcType="INTEGER" />
+    <result column="status" property="status" jdbcType="CHAR" />
+    <result column="create_time" property="createTime" jdbcType="VARCHAR" />
+    <result column="end_time" property="endTime" jdbcType="VARCHAR" />
+    <result column="flow_status" property="flowStatus" jdbcType="CHAR" />
+    <result column="check_status" property="checkStatus" jdbcType="CHAR" />
+    <result column="parent_id" property="parentId" jdbcType="CHAR" />
+  </resultMap>
+  <resultMap id="ResultMapWithBLOBs" type="com.example.demo.model.Node" extends="BaseResultMap" >
+    <result column="attach_ids" property="attachIds" jdbcType="LONGVARCHAR" />
+    <result column="forward" property="forward" jdbcType="LONGVARCHAR" />
+    <result column="content" property="content" jdbcType="LONGVARCHAR" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    node_id, flow_id, staff, levels, hasten, status, create_time, end_time, flow_status, 
+    check_status, parent_id
+  </sql>
+  <sql id="Blob_Column_List" >
+    attach_ids, forward, content
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="ResultMapWithBLOBs" parameterType="java.lang.String" >
+    select 
+    <include refid="Base_Column_List" />
+    ,
+    <include refid="Blob_Column_List" />
+    from node
+    where node_id = #{nodeId,jdbcType=CHAR}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String" >
+    delete from node
+    where node_id = #{nodeId,jdbcType=CHAR}
+  </delete>
+  <insert id="insert" parameterType="com.example.demo.model.Node" >
+    insert into node (node_id, flow_id, staff, 
+      levels, hasten, status, create_time, 
+      end_time, flow_status, check_status, 
+      parent_id, attach_ids, forward, 
+      content)
+    values (#{nodeId,jdbcType=CHAR}, #{flowId,jdbcType=CHAR}, #{staff,jdbcType=CHAR}, 
+      #{levels,jdbcType=CHAR}, #{hasten,jdbcType=INTEGER}, #{status,jdbcType=CHAR}, #{createTime,jdbcType=VARCHAR}, 
+      #{endTime,jdbcType=VARCHAR}, #{flowStatus,jdbcType=CHAR}, #{checkStatus,jdbcType=CHAR}, 
+      #{parentId,jdbcType=CHAR}, #{attachIds,jdbcType=LONGVARCHAR}, #{forward,jdbcType=LONGVARCHAR}, 
+      #{content,jdbcType=LONGVARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.example.demo.model.Node" >
+    insert into node
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="nodeId != null" >
+        node_id,
+      </if>
+      <if test="flowId != null" >
+        flow_id,
+      </if>
+      <if test="staff != null" >
+        staff,
+      </if>
+      <if test="levels != null" >
+        levels,
+      </if>
+      <if test="hasten != null" >
+        hasten,
+      </if>
+      <if test="status != null" >
+        status,
+      </if>
+      <if test="createTime != null" >
+        create_time,
+      </if>
+      <if test="endTime != null" >
+        end_time,
+      </if>
+      <if test="flowStatus != null" >
+        flow_status,
+      </if>
+      <if test="checkStatus != null" >
+        check_status,
+      </if>
+      <if test="parentId != null" >
+        parent_id,
+      </if>
+      <if test="attachIds != null" >
+        attach_ids,
+      </if>
+      <if test="forward != null" >
+        forward,
+      </if>
+      <if test="content != null" >
+        content,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="nodeId != null" >
+        #{nodeId,jdbcType=CHAR},
+      </if>
+      <if test="flowId != null" >
+        #{flowId,jdbcType=CHAR},
+      </if>
+      <if test="staff != null" >
+        #{staff,jdbcType=CHAR},
+      </if>
+      <if test="levels != null" >
+        #{levels,jdbcType=CHAR},
+      </if>
+      <if test="hasten != null" >
+        #{hasten,jdbcType=INTEGER},
+      </if>
+      <if test="status != null" >
+        #{status,jdbcType=CHAR},
+      </if>
+      <if test="createTime != null" >
+        #{createTime,jdbcType=VARCHAR},
+      </if>
+      <if test="endTime != null" >
+        #{endTime,jdbcType=VARCHAR},
+      </if>
+      <if test="flowStatus != null" >
+        #{flowStatus,jdbcType=CHAR},
+      </if>
+      <if test="checkStatus != null" >
+        #{checkStatus,jdbcType=CHAR},
+      </if>
+      <if test="parentId != null" >
+        #{parentId,jdbcType=CHAR},
+      </if>
+      <if test="attachIds != null" >
+        #{attachIds,jdbcType=LONGVARCHAR},
+      </if>
+      <if test="forward != null" >
+        #{forward,jdbcType=LONGVARCHAR},
+      </if>
+      <if test="content != null" >
+        #{content,jdbcType=LONGVARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.example.demo.model.Node" >
+    update node
+    <set >
+      <if test="flowId != null" >
+        flow_id = #{flowId,jdbcType=CHAR},
+      </if>
+      <if test="staff != null" >
+        staff = #{staff,jdbcType=CHAR},
+      </if>
+      <if test="levels != null" >
+        levels = #{levels,jdbcType=CHAR},
+      </if>
+      <if test="hasten != null" >
+        hasten = #{hasten,jdbcType=INTEGER},
+      </if>
+      <if test="status != null" >
+        status = #{status,jdbcType=CHAR},
+      </if>
+      <if test="createTime != null" >
+        create_time = #{createTime,jdbcType=VARCHAR},
+      </if>
+      <if test="endTime != null" >
+        end_time = #{endTime,jdbcType=VARCHAR},
+      </if>
+      <if test="flowStatus != null" >
+        flow_status = #{flowStatus,jdbcType=CHAR},
+      </if>
+      <if test="checkStatus != null" >
+        check_status = #{checkStatus,jdbcType=CHAR},
+      </if>
+      <if test="parentId != null" >
+        parent_id = #{parentId,jdbcType=CHAR},
+      </if>
+      <if test="attachIds != null" >
+        attach_ids = #{attachIds,jdbcType=LONGVARCHAR},
+      </if>
+      <if test="forward != null" >
+        forward = #{forward,jdbcType=LONGVARCHAR},
+      </if>
+      <if test="content != null" >
+        content = #{content,jdbcType=LONGVARCHAR},
+      </if>
+    </set>
+    where node_id = #{nodeId,jdbcType=CHAR}
+  </update>
+  <update id="updateByPrimaryKeyWithBLOBs" parameterType="com.example.demo.model.Node" >
+    update node
+    set flow_id = #{flowId,jdbcType=CHAR},
+      staff = #{staff,jdbcType=CHAR},
+      levels = #{levels,jdbcType=CHAR},
+      hasten = #{hasten,jdbcType=INTEGER},
+      status = #{status,jdbcType=CHAR},
+      create_time = #{createTime,jdbcType=VARCHAR},
+      end_time = #{endTime,jdbcType=VARCHAR},
+      flow_status = #{flowStatus,jdbcType=CHAR},
+      check_status = #{checkStatus,jdbcType=CHAR},
+      parent_id = #{parentId,jdbcType=CHAR},
+      attach_ids = #{attachIds,jdbcType=LONGVARCHAR},
+      forward = #{forward,jdbcType=LONGVARCHAR},
+      content = #{content,jdbcType=LONGVARCHAR}
+    where node_id = #{nodeId,jdbcType=CHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.example.demo.model.Node" >
+    update node
+    set flow_id = #{flowId,jdbcType=CHAR},
+      staff = #{staff,jdbcType=CHAR},
+      levels = #{levels,jdbcType=CHAR},
+      hasten = #{hasten,jdbcType=INTEGER},
+      status = #{status,jdbcType=CHAR},
+      create_time = #{createTime,jdbcType=VARCHAR},
+      end_time = #{endTime,jdbcType=VARCHAR},
+      flow_status = #{flowStatus,jdbcType=CHAR},
+      check_status = #{checkStatus,jdbcType=CHAR},
+      parent_id = #{parentId,jdbcType=CHAR}
+    where node_id = #{nodeId,jdbcType=CHAR}
+  </update>
+</mapper>
