@@ -1,0 +1,84 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.example.demo.dao.MyTestMapper" >
+  <resultMap id="BaseResultMap" type="com.example.demo.model.MyTest" >
+    <id column="id" property="id" jdbcType="BIGINT" />
+    <result column="name" property="name" jdbcType="VARCHAR" />
+    <result column="descs" property="descs" jdbcType="VARCHAR" />
+    <result column="datas" property="datas" jdbcType="TIMESTAMP" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    id, name, descs, datas
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Long" >
+    select 
+    <include refid="Base_Column_List" />
+    from mytest
+    where id = #{id,jdbcType=BIGINT}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long" >
+    delete from mytest
+    where id = #{id,jdbcType=BIGINT}
+  </delete>
+
+  <!-- 插入成功后，实体中会获取到id。添加属性 useGeneratedKeys="true" keyProperty="id" -->
+  <insert id="insert" parameterType="com.example.demo.model.MyTest" useGeneratedKeys="true" keyProperty="id">
+    insert into mytest (id, name, descs, 
+      datas)
+    values (#{id,jdbcType=BIGINT}, #{name,jdbcType=VARCHAR}, #{descs,jdbcType=VARCHAR}, 
+      #{datas,jdbcType=TIMESTAMP})
+  </insert>
+  <insert id="insertSelective" parameterType="com.example.demo.model.MyTest" >
+    insert into mytest
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        id,
+      </if>
+      <if test="name != null" >
+        name,
+      </if>
+      <if test="descs != null" >
+        descs,
+      </if>
+      <if test="datas != null" >
+        datas,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=BIGINT},
+      </if>
+      <if test="name != null" >
+        #{name,jdbcType=VARCHAR},
+      </if>
+      <if test="descs != null" >
+        #{descs,jdbcType=VARCHAR},
+      </if>
+      <if test="datas != null" >
+        #{datas,jdbcType=TIMESTAMP},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.example.demo.model.MyTest" >
+    update mytest
+    <set >
+      <if test="name != null" >
+        name = #{name,jdbcType=VARCHAR},
+      </if>
+      <if test="descs != null" >
+        descs = #{descs,jdbcType=VARCHAR},
+      </if>
+      <if test="datas != null" >
+        datas = #{datas,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.example.demo.model.MyTest" >
+    update mytest
+    set name = #{name,jdbcType=VARCHAR},
+      descs = #{descs,jdbcType=VARCHAR},
+      datas = #{datas,jdbcType=TIMESTAMP}
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+</mapper>
